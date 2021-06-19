@@ -1,0 +1,178 @@
+1. 安装WSL2
+
+ 1.1 官方文档：https://docs.microsoft.com/zh-cn/windows/wsl/install-win10
+ 1.2 启用适用于Linux的Windows子系统：dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+ 1.3 启用虚拟机：dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+ 1.4 将 WSL 2 设置为默认版本: wsl --set-default-version 2
+
+2. 安装和运行Ubuntu终端
+
+ 2.1 查看Ubuntu版本信息：lsb_release -a
+ 2.2 查看WSL运行信息： wsl -l -a
+
+3. 安装Ubuntu GUI
+
+3.1 升级Ubuntu: sudo apt update && sudo apt -y upgrade
+3.2 安装xrdp：sudo apt install xrdp
+3.3 安装xfce4: sudo apt install -y xfce4
+3.4 安装xfce4-goodies扩展：sudo apt install -y xfce4-goodies
+3.5 备份xrdp配置文件：sudo cp /etc/xrdp/xrdp.ini /etc/xrdp/xrdp.ini.bak
+3.6 修改xrdp监听端口：sudo sed -i 's/3389/3390/g' /etc/xrdp/xrdp.ini
+3.7 修改xrdp和xserver连接数：
+sudo sed -i 's/max_bpp=32/#max_bpp=32\nmax_bpp=128/g' /etc/xrdp/xrdp.ini
+sudo sed -i 's/max_bpp=32/#max_bpp=32\nmax_bpp=128/g' /etc/xrdp/xrdp.ini
+3.8 保存xfce4-session到xsession中：echo xfce4-session > ~/.xsession
+3.9  修改文件: sudo nano /etc/xrdp/startwm.sh
+     用#号注释掉最后2行 ，
+     添加 startxfce4
+
+      按ctrl+x 保存， 点yes ，按enter退出
+
+
+      
+4.0 开启xrdp远程服务：  sudo /etc/init.d/xrdp start
+
+
+
+
+
+5.0  链接 : win开始菜单远程链接图标
+            
+             输入:localhost:3390
+           
+              ID: andy
+              PWD:summer12
+
+
+
+chromedriver 配置
+
+
+$  unzip chromedriver_linux64_2.zip
+
+$ chmod +x ~/chromedriver
+
+$ sudo mv ~/chromedriver /usr/locat/share/chromdriver
+
+$
+
+
+
+ubantu
+
+Chrome浏览器中午乱码
+
+sudo apt-get install fonts-droid-fallback ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-uming
+
+
+
+
+
+---------------------------------------------------------------------------
+*****************************************************************************
+
+一、安装Chrome浏览器
+1、安装依赖
+
+sudo apt-get install libxss1 libappindicator1 libindicator7
+2、下载Chrome安装包
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+3、安装
+
+sudo dpkg -i google-chrome*.deb
+sudo apt-get install -f
+二、安装ChromeDriver
+1、安装xvfb以便我们可以无头奔跑地运行Chrome
+
+sudo apt-get install xvfb
+2、安装依赖
+
+sudo apt-get install unzip
+3、下载安装包
+
+wget -N http://chromedriver.storage.googleapis.com/2.26/chromedriver_linux64.zip
+4、解压缩+添加执行权限
+
+unzip chromedriver_linux64.zip
+5、移动
+
+sudo mv -f chromedriver /usr/local/share/chromedriver
+6、建立软连接
+
+sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
+三、无头运行Chrome
+1、安装Python依赖
+
+pip3 install selenium
+
+pip3 install pyvirtualdisplay
+
+2、开干
+
+1
+2
+3
+4
+5
+6
+7
+8
+from pyvirtualdisplay import Display
+from selenium import webdriver
+ 
+display = Display(visible=0, size=(800, 600))　　# 初始化屏幕
+display.start()　　
+driver = webdriver.Chrome()　　# 初始化Chrome
+driver.get('http://www.cnblogs.com/x54256/')
+print driver.title
+
+
+
+
+
+
+
+
+
+
+
+
+
+ubantu   python 虚拟环境 *（Django）
+
+
+在使用ubuntu18.04搭建虚拟环境时
+一.安装虚拟命令：
+
+pip install virtualenv
+pip install virtualenvwrapper
+二.安装完虚拟环境后,提示找不到mkvirtualenv命令,须配置环境变量：
+
+# 1、创建目录用来存放虚拟环境
+
+
+mkdir $HOME/.virtualenvs
+
+# 2、打开~/.bashrc文件，并添加如下：
+
+  vim ~/.bashrc
+
+
+
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+
+
+# 3、运行source ~/.bashrc
+
+
+在第3步：source ~/.bashrc 后系统报错提示：
+bash: /usr/local/bin/virtualenvwrapper.sh: 没有那个文件或目录
+在各种查找后的有效解决办法：
+
+ubuntu18.04里，通过pip安装virtualenvwrapper得到的virtualenvwrapper.sh被安装在~/.local/bin/目录下，需要修改上面添加在~/.bashrc的内容中的路径即可：
+
+export WORKON_HOME=$HOME/.virtualenvs
+source ~/.local/bin/virtualenvwrapper.sh

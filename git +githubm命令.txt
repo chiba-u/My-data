@@ -1,0 +1,84 @@
+
+
+git init         初始化
+
+git status     查看状态
+
+git add        添加文件
+git add .      添加所以文件
+
+
+git commit -m "这是我的第一个版本管理"    建立版本更新
+
+git log       查看日志
+git log --online
+
+
+git reset --hard +79083e2  回到某个版本
+git reset --hard HEAD~100 +  回到100个版本前
+
+
+
+
+git reflog   回到将来
+
+
+
+
+git diff      查看更改信息
+git diff --cached  查看更改信息
+
+git 
+
+
+
+
+git branch      查看分支
+
+
+------------------------------------------------------------------------
+把本地资料上传到云服务器  github
+
+
+git remote -v 查询远端repository
+
+
+git remote add r添加远端repository  remote →远方，遥远的
+git remote add origin + "githubURL"
+
+
+git push origin master  上传到远端
+
+---------------------------------------------------------------------
+把远端资料下载到本地
+
+git clone +远端空间地址+本地文件夹名
+
+git pull  +远端空间名称+远端空间的分支  pull→取得，拉取，下载
+
+
+git pull origin master 
+
+　
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
